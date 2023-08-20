@@ -31,6 +31,7 @@ def localFinder(request):
                     WindSpeed=responseWeatherJSON["current"]["wind_kph"]
                     WindDir=responseWeatherJSON["current"]["wind_dir"]
                     Precip=responseWeatherJSON["current"]["precip_mm"]
+                    Weather.objects.create(precip_prob_field=Precip, wind_speed_field=WindSpeed, wind_dir_field=WindDir, location=location)
                     return render(request, "locationFinder.html", {"form": "", "long":long, "lat":lat, "condition":WeatherCon, "icon":WeatherIco, "windsp":str(WindSpeed)+" km/h", "winddir":WindDir, "precip":str(Precip)+" mm", "weathercss":True, "formcss":False})
                 else:
                    return render(request, "locationFinder.html", {"form": "", "error":"API error"}) 
