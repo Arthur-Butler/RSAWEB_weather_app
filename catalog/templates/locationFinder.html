@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css"> -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        disable: false, 
+        startEvent: 'DOMContentLoaded', 
+        initClassName: 'aos-init', 
+        animatedClassName: 'aos-animate',
+        useClassNames: false, 
+        disableMutationObserver: false, 
+        debounceDelay: 50, 
+        throttleDelay: 99, 
+      });
+    </script>
+  </head>
+  <body>
+    {% if formcss %}   
+      <header id="weatherHead">
+        <h1>WEATHER FINDER</h1>
+          <form action="/catalog/" method="post" id="weatherForm">
+              {% csrf_token %}
+              {{ form }}
+              <input type="submit" value="Submit" id="submit">
+          </form>
+      </header>
+    {% endif %}
+    {% if weathercss %}   
+    {{error}} 
+      <div id="weatherInfo">
+        <iframe
+          id="weatherIframe"
+          width="450"
+          height="250"
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps/embed/v1/view?key=AIzaSyAqLLcx06pqY8llFyhfttOK30BCnnmm5sU&center={{ lat }},{{ long }}&zoom=15&maptype=satellite"
+          allowfullscreen>
+        </iframe>
+        <div id="weatherCondition">
+          <h2>{{condition}}</h2>
+          <img src="{{icon}}" id="weatherIcon">
+        </div>
+        <hr/>
+        <h2>Wind Speed: {{windsp}}</h2>
+        <hr/>
+        <div id="windDir">
+          <h2>Wind Direction: {{winddir}}</h2>
+          <i class="fa-solid fa-up"></i>
+          <i class="fa-solid fa-up-left"></i>
+          <i class="fa-solid fa-up-right"></i>
+          <i class="fa-solid fa-left"></i>
+          <i class="fa-solid fa-right"></i>
+          <i class="fa-solid fa-down"></i>
+          <i class="fa-solid fa-down-left"></i>
+          <i class="fa-solid fa-down-right"></i>
+        </div>
+        <hr/>
+        <h2>Precipitation: {{precip}}</h2>
+      </div>
+    {% endif %}
+  </body>
+</html>
