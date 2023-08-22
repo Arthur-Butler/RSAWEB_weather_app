@@ -27,14 +27,17 @@ class Location(models.Model):
 class Weather(models.Model):
     """A typical class defining a model, derived from the Model class."""
     # Fields
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    location = models.OneToOneField(
+        Location,
+        on_delete=models.CASCADE,
+        primary_key=True,
+        default=uuid.uuid4
+    )
+    weather_condition_field=models.CharField(max_length=100, default="No condition")
     precip_prob_field = models.CharField(max_length=10)
     wind_speed_field = models.CharField(max_length=10)
     wind_dir_field = models.CharField(max_length=10)
-    location = models.ForeignKey(
-        'Location',
-        on_delete=models.CASCADE,
-    )
+    
     # …
 
     # Methods
@@ -44,5 +47,4 @@ class Weather(models.Model):
 
     def __str__(self):
         """String for representing the MyModelName object (in Admin site etc.)."""
-        return self.location_field
-
+        return self.weather_condition_field

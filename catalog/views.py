@@ -21,16 +21,22 @@ def localFinder(request):
                 lat=responseLocalJSON["data"][0]["latitude"]
                 long=responseLocalJSON["data"][0]["longitude"]
                 print("lat :" + str(lat) + " long :" + str(long))
-                Location.objects.create(location_field=locationInput, long_field=long, lat_field=lat)
+                l1=Location(location_field=locationInput, long_field=long, lat_field=lat)
+                l1.save()
                 responseWeather = requests.get("http://api.weatherapi.com/v1/current.json?key=9b0dbf6ed8964b80a1d122316230407&q="+str(lat)+","+str(long)+"&aqi=no")
+                responseWeatherHistory = requests.get("http://api.weatherapi.com/v1/history.json?key=9b0dbf6ed8964b80a1d122316230407&q="+str(lat)+","+str(long)+"&aqi=no")
                 print(responseWeather)
                 if(responseWeather is not None):
                     responseWeatherJSON=responseWeather.json()
+                    responseWeatherHistoryJSON=responseWeatherHistory.json()
+                    print(responseWeatherHistoryJSON)
                     WeatherCon=responseWeatherJSON["current"]["condition"]["text"]
                     WeatherIco=responseWeatherJSON["current"]["condition"]["icon"]
                     WindSpeed=responseWeatherJSON["current"]["wind_kph"]
                     WindDir=responseWeatherJSON["current"]["wind_dir"]
                     Precip=responseWeatherJSON["current"]["precip_mm"]
+                    w1=Weather(location=l1, weather_condition_field=WeatherCon, precip_prob_field=Precip, wind_speed_field=WindSpeed, wind_dir_field=WindDir)
+                    w1.save()
                     return render(request, "locationFinder.html", {"form": "", "long":long, "lat":lat, "condition":WeatherCon, "icon":WeatherIco, "windsp":str(WindSpeed)+" km/h", "winddir":WindDir, "precip":str(Precip)+" mm", "weathercss":True, "formcss":False})
                 else:
                    return render(request, "locationFinder.html", {"form": "", "error":"API error"}) 

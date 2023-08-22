@@ -1,0 +1,136 @@
+#weatherHead{
+    display: flex;
+    position: fixed;
+    background-image: url("https://wallpaperaccess.com/full/896979.jpg");
+    background-position:bottom;
+    background-size: 200% 200%;
+    background-repeat: no-repeat;
+    -webkit-animation: scroll 70s linear infinite;
+    animation: scroll 70s linear infinite;
+    width: 100%;
+    height: 100%;
+    top: 0%;
+    bottom: 0%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    height:100%;
+    background-image: url("https://wallpaperaccess.com/full/896979.jpg");
+    background-position:bottom;
+    background-size: 200% 200%;
+    background-repeat: no-repeat;
+    -webkit-animation: scroll 70s linear infinite;
+    animation: scroll 70s linear infinite;
+}
+
+@keyframes scroll {
+    100% {
+      background-position: -1000px 0px;
+    }
+}
+
+
+#weatherForm{
+    background-color: #252f44;
+    width:fit-content;
+    height: fit-content;
+    padding:20px;
+    border-radius: 15px;
+}
+
+h1{
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #252f44;
+    font-size: 100px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color:rgb(37, 141, 98);
+}
+
+label{
+    color: rgb(37, 141, 98);
+    font-family: din-round,sans-serif;
+    font-style: oblique;
+}
+
+#weatherInfo{
+    display: block;
+    border-radius: 10px;
+    width: fit-content;
+    height: fit-content;
+    padding: 20px;
+    background-color: #181d27;
+    color: aqua;
+}
+
+#weatherIframe{
+    border-radius: 10px 10px 0px 0px;
+}
+
+/* CSS */
+#submit {
+  appearance: button;
+  background-color: rgb(37, 141, 98);
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: din-round,sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  line-height: 20px;
+  margin: 0;
+  outline: none;
+  overflow: visible;
+  padding: 13px 16px;
+  text-align: center;
+  text-transform: uppercase;
+  touch-action: manipulation;
+  transform: translateZ(0);
+  transition: filter .2s;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 100%;
+  margin-top: 30px;
+}
+
+#submit:after {
+  background-clip: padding-box;
+  background-color: #1CB0F6;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  bottom: -4px;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
+#submit:main,
+#submit:focus {
+  user-select: auto;
+}
+
+#submit:hover:not(:disabled) {
+  filter: brightness(1.1);
+  -webkit-filter: brightness(1.1);
+}
+
+#submit:disabled {
+  cursor: auto;
+}
